@@ -1,0 +1,36 @@
+<div id="booklist_container">
+  <ul>
+    @for (book of books; track $index) {
+    <li>
+      <div class="book_info_container">
+        <p>
+          Title:{{book.title}} Author:{{book.author}} Read?: {{book.read}} 
+        </p>
+      </div>
+      
+      
+      <div class="list_btn_container">
+        @if (book.read === true) {<button class="read_button" (click)="updateRead(book)">Mark as not read</button>}
+        
+        @else {<button class="unread_button" (click)="updateRead(book)">Mark as read</button>}
+
+        <button class="danger" (click)="deleteBook(book.id)">Delete</button>
+      </div>
+    </li>
+    }
+  </ul>
+</div>
+<!-- <div class="book_form_container">
+  <form>
+    <label for="title">Title: </label>
+    <input [(ngModel)]="title" type="text" name="title" id="title">
+
+    <label for="author">Author: </label>
+    <input [(ngModel)]="author" type="text" name="author" id="author">
+
+    <label for="read">Read </label>
+    <input type="checkbox" [(ngModel)]="read" name="read" id="read">
+
+    <button (click)="createBook(title, author, read)">Submit</button>
+  </form>
+</div> -->
