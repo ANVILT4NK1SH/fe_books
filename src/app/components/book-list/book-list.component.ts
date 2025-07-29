@@ -1,13 +1,13 @@
-import { Component, OnInit, } from '@angular/core';
-import { BookService } from '../services/book.service';
-import { Book } from '../models/book';
+import { Component, OnInit } from '@angular/core';
+import { BookService } from '../../services/book.service';
+import { Book } from '../../models/book';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-book-list',
   imports: [FormsModule],
   templateUrl: './book-list.component.html',
-  styleUrl: './book-list.component.scss'
+  styleUrl: './book-list.component.scss',
 })
 export class BookListComponent implements OnInit {
   books: Book[] = [];
@@ -15,15 +15,15 @@ export class BookListComponent implements OnInit {
   author: string = '';
   read: boolean = false;
 
-  constructor(private bookService: BookService){}
+  constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
-    this.bookService.getBooks().subscribe((response) => {
-      this.books = response
-    })
+    this.bookService.getMyBooks().subscribe((response) => {
+      this.books = response;
+    });
   }
 
-  createBook(title: string, author: string, read: boolean){
+  createBook(title: string, author: string, read: boolean) {
     this.bookService
       .createBook({ title, author, read })
       .subscribe((response) => {
@@ -31,14 +31,14 @@ export class BookListComponent implements OnInit {
       });
   }
 
-  deleteBook(id: number){
+  deleteBook(id: number) {
     this.bookService.deleteBook(id).subscribe((response) => {
       this.books = this.books.filter((book) => book.id !== response.id);
     });
   }
 
-  updateRead(book: Book){
-    book.read = !book.read
+  updateRead(book: Book) {
+    book.read = !book.read;
     this.bookService.updateBook(book).subscribe((response) => {
       const index = this.books.findIndex((book) => book.id === response.id);
       this.books[index] = response;

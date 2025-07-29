@@ -1,19 +1,24 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
-import { BookService } from '../services/book.service';
-import { Book } from '../models/book';
+import { BookService } from '../../services/book.service';
+import { Book } from '../../models/book';
 
 @Component({
   selector: 'app-book-new',
   imports: [ReactiveFormsModule],
   templateUrl: './book-new.component.html',
-  styleUrl: './book-new.component.scss'
+  styleUrl: './book-new.component.scss',
 })
 export class BookNewComponent {
   newBookForm: FormGroup;
 
-  constructor(private bookService: BookService, private router:Router) {
+  constructor(private bookService: BookService, private router: Router) {
     this.newBookForm = new FormGroup({
       title: new FormControl('', Validators.required),
       author: new FormControl('', Validators.required),
@@ -22,8 +27,8 @@ export class BookNewComponent {
   }
 
   create() {
-    if(this.newBookForm.valid) {
-      this.bookService.createBook( this.newBookForm.value ).subscribe({
+    if (this.newBookForm.valid) {
+      this.bookService.createBook(this.newBookForm.value).subscribe({
         next: (book: Book) => {
           console.log('Book created', book);
           this.router.navigate(['/']);
