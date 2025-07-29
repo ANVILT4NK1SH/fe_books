@@ -15,8 +15,8 @@ export class BookService {
     return this.http.get<Book[]>(this.url);
   }
 
-  getBookById(id: number): Observable<Book> {
-    return this.http.get<Book>(`${this.url}/${id}`);
+  getMyBooks(): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.url}/mybooks`);
   }
 
   createBook(book: { title: string; author: string; read: boolean}): Observable<Book> {
