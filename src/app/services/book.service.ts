@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { Book } from '../models/book';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BookService {
-  private url = 'http://localhost:3000/books';
+  private url = 'https://shawnsbooksapp.onrender.com/books';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getBooks(): Observable<Book[]>{
+  getBooks(): Observable<Book[]> {
     return this.http.get<Book[]>(this.url);
   }
 
@@ -19,8 +19,12 @@ export class BookService {
     return this.http.get<Book[]>(`${this.url}/mybooks`);
   }
 
-  createBook(book: { title: string; author: string; read: boolean}): Observable<Book> {
-    console.log(book)
+  createBook(book: {
+    title: string;
+    author: string;
+    read: boolean;
+  }): Observable<Book> {
+    console.log(book);
     return this.http.post<Book>(this.url, book);
   }
 

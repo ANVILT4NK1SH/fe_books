@@ -12,14 +12,17 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private router: Router) {}
 
   singup(user:any){
-    return this.http.post('http://localhost:3000/users', user);
+    return this.http.post('https://shawnsbooksapp.onrender.com/users', user);
   }
 
   login(username: string, password: string){
-    return this.http.post<{ token: string }>('http://localhost:3000/login', {
-      username,
-      password,
-    });
+    return this.http.post<{ token: string }>(
+      'https://shawnsbooksapp.onrender.com/login',
+      {
+        username,
+        password,
+      }
+    );
   }
 
   setToken(token: string){
