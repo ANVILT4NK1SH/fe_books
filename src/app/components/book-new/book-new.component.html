@@ -12,6 +12,10 @@
       <label for="read">Read?:</label>
       <input type="checkbox" formControlName="read">
     </div>
+    <div>
+      <label for="cover_Image">Cover Image</label>
+      <input type="file" (change)="onFileSelected($event)" id="cover_Image" />
+    </div>
     <button type="submit" [disabled]="!newBookForm.valid">Submit</button>
   </form>
 </div>
