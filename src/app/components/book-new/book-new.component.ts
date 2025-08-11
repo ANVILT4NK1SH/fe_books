@@ -17,6 +17,7 @@ import { Book } from '../../models/book';
 })
 export class BookNewComponent {
   newBookForm: FormGroup;
+  selectedFile: File | null = null;
 
   constructor(private bookService: BookService, private router: Router) {
     this.newBookForm = new FormGroup({
@@ -26,17 +27,29 @@ export class BookNewComponent {
     });
   }
 
+  onFileSelected(event: any) {
+    if(event.target.files && event.target.files[0]) {
+      this.selectedFile = event.target.files[0];
+    }
+  }
+
   create() {
     if (this.newBookForm.valid) {
-      this.bookService.createBook(this.newBookForm.value).subscribe({
+      const formData = new FormData();
+      formData.append('title', this.newBookForm.get('title')!.value!);
+      formData.append('author', this.newBookForm.get('author')!.value!);
+      formData.append('read', this.newBookForm.get('read')!.value!);
+      formData.append('cover_image', this.selectedFile, this.selectedFile.name);
+
+      this.bookService.createBook(formData).subscribe({
         next: (book: Book) => {
           console.log('Book created', book);
-          this.router.navigate(['/']);
+          this.router.navigate(['/']);          
         },
         error: (error: any) => {
           console.error('Error creating book', error);
         },
-      });
+      })
     }
   }
 }

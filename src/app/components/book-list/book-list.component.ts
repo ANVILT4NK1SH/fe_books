@@ -23,14 +23,6 @@ export class BookListComponent implements OnInit {
     });
   }
 
-  createBook(title: string, author: string, read: boolean) {
-    this.bookService
-      .createBook({ title, author, read })
-      .subscribe((response) => {
-        this.books.push(response);
-      });
-  }
-
   deleteBook(id: number) {
     this.bookService.deleteBook(id).subscribe((response) => {
       this.books = this.books.filter((book) => book.id !== response.id);
