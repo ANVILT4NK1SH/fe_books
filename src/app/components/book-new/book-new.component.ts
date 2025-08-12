@@ -34,7 +34,7 @@ export class BookNewComponent {
   }
 
   create() {
-    if (this.newBookForm.valid) {
+    if (this.newBookForm.valid && this.selectedFile) {
       const formData = new FormData();
       formData.append('title', this.newBookForm.get('title')!.value!);
       formData.append('author', this.newBookForm.get('author')!.value!);
