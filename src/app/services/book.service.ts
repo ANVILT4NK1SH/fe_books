@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Book } from '../models/book';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookService {
-  private url = 'https://shawnsbooksapp.onrender.com/books';
+  private url = `${environment.apiUrl}/books`;
 
   constructor(private http: HttpClient) {}
 
