@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,12 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private router: Router) {}
 
   singup(user:any){
-    return this.http.post('https://shawnsbooksapp.onrender.com/users', user);
+    return this.http.post(`${environment.apiUrl}/users`, user);
   }
 
   login(username: string, password: string){
     return this.http.post<{ token: string }>(
-      'https://shawnsbooksapp.onrender.com/login',
+      `${environment.apiUrl}/login`,
       {
         username,
         password,
